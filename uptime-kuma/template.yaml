@@ -10,8 +10,7 @@ metadata:
   icon: activity
 
 volumes:
-  kuma-data:
-    backup_enabled: true
+  kuma-data: {}
 
 applications:
   uptime-kuma:

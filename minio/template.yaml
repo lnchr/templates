@@ -13,4 +13,3 @@ buckets:
   data:
     bucket_name: data
     public: false
-    backup_enabled: false

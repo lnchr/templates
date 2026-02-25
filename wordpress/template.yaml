@@ -14,8 +14,7 @@ databases:
     type: mysql
 
 volumes:
-  wp-content:
-    backup_enabled: true
+  wp-content: {}
 
 applications:
   wordpress:
