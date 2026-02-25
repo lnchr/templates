@@ -28,40 +28,44 @@ applications:
   n8n:
     app_type: web
     source_type: docker_image
-    image_url: n8nio/n8n:latest
+    image_url: n8nio/n8n:1
     exposed_ports: [5678]
     replicas: 1
     healthcheck_path: /healthz
+    cpu_limit: "1.0"
+    memory_limit: 1G
     icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/n8n.png
     color: "#ea4b71"
     depends_on: [n8n-db, n8n-redis]
     env:
       DB_TYPE: postgresdb
-      DB_POSTGRESDB_HOST: ${n8n-db.HOST}
-      DB_POSTGRESDB_PORT: ${n8n-db.PORT}
-      DB_POSTGRESDB_DATABASE: ${n8n-db.DATABASE}
-      DB_POSTGRESDB_USER: ${n8n-db.USER}
-      DB_POSTGRESDB_PASSWORD: ${n8n-db.PASSWORD}
-      QUEUE_BULL_REDIS_HOST: ${n8n-redis.HOST}
-      QUEUE_BULL_REDIS_PORT: ${n8n-redis.PORT}
+      DB_POSTGRESDB_HOST: ${n8n-db.host}
+      DB_POSTGRESDB_PORT: ${n8n-db.port}
+      DB_POSTGRESDB_DATABASE: ${n8n-db.database}
+      DB_POSTGRESDB_USER: ${n8n-db.user}
+      DB_POSTGRESDB_PASSWORD: ${n8n-db.password}
+      QUEUE_BULL_REDIS_HOST: ${n8n-redis.host}
+      QUEUE_BULL_REDIS_PORT: ${n8n-redis.port}
       EXECUTIONS_MODE: queue
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
 
   n8n-worker:
     app_type: worker
     source_type: docker_image
-    image_url: n8nio/n8n:latest
+    image_url: n8nio/n8n:1
+    cpu_limit: "1.0"
+    memory_limit: 1G
     icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/n8n.png
     color: "#ea4b71"
     depends_on: [n8n-db, n8n-redis]
     env:
       DB_TYPE: postgresdb
-      DB_POSTGRESDB_HOST: ${n8n-db.HOST}
-      DB_POSTGRESDB_PORT: ${n8n-db.PORT}
-      DB_POSTGRESDB_DATABASE: ${n8n-db.DATABASE}
-      DB_POSTGRESDB_USER: ${n8n-db.USER}
-      DB_POSTGRESDB_PASSWORD: ${n8n-db.PASSWORD}
-      QUEUE_BULL_REDIS_HOST: ${n8n-redis.HOST}
-      QUEUE_BULL_REDIS_PORT: ${n8n-redis.PORT}
+      DB_POSTGRESDB_HOST: ${n8n-db.host}
+      DB_POSTGRESDB_PORT: ${n8n-db.port}
+      DB_POSTGRESDB_DATABASE: ${n8n-db.database}
+      DB_POSTGRESDB_USER: ${n8n-db.user}
+      DB_POSTGRESDB_PASSWORD: ${n8n-db.password}
+      QUEUE_BULL_REDIS_HOST: ${n8n-redis.host}
+      QUEUE_BULL_REDIS_PORT: ${n8n-redis.port}
       EXECUTIONS_MODE: queue
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}

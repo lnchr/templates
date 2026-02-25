@@ -13,6 +13,10 @@ databases:
   ghost-db:
     type: mysql
 
+volumes:
+  ghost-content:
+    size_limit: 5368709120
+
 applications:
   ghost:
     app_type: web
@@ -20,14 +24,18 @@ applications:
     image_url: ghost:5-alpine
     exposed_ports: [2368]
     replicas: 1
-    healthcheck_path: /ghost/api/v4/admin/site/
+    cpu_limit: "0.5"
+    memory_limit: 512M
     icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/ghost.png
     color: "#15171a"
     depends_on: [ghost-db]
+    volumes:
+      - name: ghost-content
+        mount_path: /var/lib/ghost/content
     env:
       database__client: mysql
-      database__connection__host: ${ghost-db.HOST}
-      database__connection__port: ${ghost-db.PORT}
-      database__connection__user: ${ghost-db.USER}
-      database__connection__password: ${ghost-db.PASSWORD}
-      database__connection__database: ${ghost-db.DATABASE}
+      database__connection__host: ${ghost-db.host}
+      database__connection__port: ${ghost-db.port}
+      database__connection__user: ${ghost-db.user}
+      database__connection__password: ${ghost-db.password}
+      database__connection__database: ${ghost-db.database}

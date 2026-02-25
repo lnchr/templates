@@ -10,7 +10,8 @@ metadata:
   icon: activity
 
 volumes:
-  kuma-data: {}
+  kuma-data:
+    size_limit: 1073741824
 
 applications:
   uptime-kuma:
@@ -19,6 +20,8 @@ applications:
     image_url: louislam/uptime-kuma:1
     exposed_ports: [3001]
     replicas: 1
+    cpu_limit: "0.25"
+    memory_limit: 256M
     healthcheck_path: /api/status-page/heartbeat
     icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/uptime-kuma.png
     color: "#5cdd8b"

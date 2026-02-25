@@ -14,15 +14,18 @@ databases:
     type: mysql
 
 volumes:
-  wp-content: {}
+  wp-content:
+    size_limit: 10737418240
 
 applications:
   wordpress:
     app_type: web
     source_type: docker_image
-    image_url: wordpress:latest
+    image_url: wordpress:6-php8.3-apache
     exposed_ports: [80]
     replicas: 1
+    cpu_limit: "0.5"
+    memory_limit: 512M
     icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/wordpress.png
     color: "#21759b"
     depends_on: [wordpress-db]
@@ -30,7 +33,7 @@ applications:
       - name: wp-content
         mount_path: /var/www/html/wp-content
     env:
-      WORDPRESS_DB_HOST: ${wordpress-db.HOST}:${wordpress-db.PORT}
-      WORDPRESS_DB_USER: ${wordpress-db.USER}
-      WORDPRESS_DB_PASSWORD: ${wordpress-db.PASSWORD}
-      WORDPRESS_DB_NAME: ${wordpress-db.DATABASE}
+      WORDPRESS_DB_HOST: ${wordpress-db.host}:${wordpress-db.port}
+      WORDPRESS_DB_USER: ${wordpress-db.user}
+      WORDPRESS_DB_PASSWORD: ${wordpress-db.password}
+      WORDPRESS_DB_NAME: ${wordpress-db.database}
