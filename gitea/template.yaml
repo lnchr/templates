@@ -1,0 +1,32 @@
+version: "1.0"
+
+metadata:
+  name: gitea
+  display_name: Gitea
+  description: |
+    Lightweight self-hosted Git service with CI/CD,
+    issue tracking, and package registry.
+  tags: [git, devtools, ci-cd]
+  icon: git-branch
+
+databases:
+  gitea-db:
+    type: postgres
+
+applications:
+  gitea:
+    app_type: web
+    source_type: docker_image
+    image_url: gitea/gitea:latest
+    exposed_ports: [3000]
+    replicas: 1
+    healthcheck_path: /api/healthz
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/gitea.png
+    color: "#609926"
+    depends_on: [gitea-db]
+    env:
+      GITEA__database__DB_TYPE: postgres
+      GITEA__database__HOST: ${gitea-db.HOST}:${gitea-db.PORT}
+      GITEA__database__NAME: ${gitea-db.DATABASE}
+      GITEA__database__USER: ${gitea-db.USER}
+      GITEA__database__PASSWD: ${gitea-db.PASSWORD}

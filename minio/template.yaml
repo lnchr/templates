@@ -1,0 +1,16 @@
+version: "1.0"
+
+metadata:
+  name: minio
+  display_name: MinIO
+  description: |
+    High-performance S3-compatible object storage
+    for any workload.
+  tags: [storage, s3, object-storage]
+  icon: hard-drive
+
+buckets:
+  data:
+    bucket_name: data
+    public: false
+    backup_enabled: false

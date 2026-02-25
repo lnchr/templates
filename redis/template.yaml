@@ -1,0 +1,13 @@
+version: "1.0"
+
+metadata:
+  name: redis
+  display_name: Redis
+  description: |
+    In-memory data store for caching, queues, and real-time apps.
+  tags: [cache, database, in-memory]
+  icon: database
+
+databases:
+  redis:
+    type: redis

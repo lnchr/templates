@@ -1,0 +1,67 @@
+version: "1.0"
+
+metadata:
+  name: n8n
+  display_name: N8N (w/ workers)
+  description: |
+    A powerful workflow automation tool for technical people.
+    Deployed in queue mode with a dedicated worker process,
+    PostgreSQL for persistence, and Redis as the message broker.
+  tags: [automation, workflow, low-code]
+  icon: search
+
+variables:
+  N8N_ENCRYPTION_KEY:
+    type: secret
+    generate: true
+    length: 32
+    description: Encryption key for stored credentials
+
+databases:
+  n8n-db:
+    type: postgres
+
+  n8n-redis:
+    type: redis
+
+applications:
+  n8n:
+    app_type: web
+    source_type: docker_image
+    image_url: n8nio/n8n:latest
+    exposed_ports: [5678]
+    replicas: 1
+    healthcheck_path: /healthz
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/n8n.png
+    color: "#ea4b71"
+    depends_on: [n8n-db, n8n-redis]
+    env:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: ${n8n-db.HOST}
+      DB_POSTGRESDB_PORT: ${n8n-db.PORT}
+      DB_POSTGRESDB_DATABASE: ${n8n-db.DATABASE}
+      DB_POSTGRESDB_USER: ${n8n-db.USER}
+      DB_POSTGRESDB_PASSWORD: ${n8n-db.PASSWORD}
+      QUEUE_BULL_REDIS_HOST: ${n8n-redis.HOST}
+      QUEUE_BULL_REDIS_PORT: ${n8n-redis.PORT}
+      EXECUTIONS_MODE: queue
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+
+  n8n-worker:
+    app_type: worker
+    source_type: docker_image
+    image_url: n8nio/n8n:latest
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/n8n.png
+    color: "#ea4b71"
+    depends_on: [n8n-db, n8n-redis]
+    env:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: ${n8n-db.HOST}
+      DB_POSTGRESDB_PORT: ${n8n-db.PORT}
+      DB_POSTGRESDB_DATABASE: ${n8n-db.DATABASE}
+      DB_POSTGRESDB_USER: ${n8n-db.USER}
+      DB_POSTGRESDB_PASSWORD: ${n8n-db.PASSWORD}
+      QUEUE_BULL_REDIS_HOST: ${n8n-redis.HOST}
+      QUEUE_BULL_REDIS_PORT: ${n8n-redis.PORT}
+      EXECUTIONS_MODE: queue
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}

@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "n8n",
+    "display_name": "N8N (w/ workers)",
+    "description": "A powerful workflow automation tool for technical people",
+    "tags": ["automation", "workflow", "low-code"],
+    "icon": "Workflow",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/n8n.png",
+    "color": "#ea4b71",
+    "category": "Automation"
+  },
+  {
+    "slug": "wordpress",
+    "display_name": "WordPress",
+    "description": "The world's most popular CMS with MySQL database",
+    "tags": ["cms", "blog", "php"],
+    "icon": "Globe",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/wordpress.png",
+    "color": "#21759b",
+    "category": "CMS"
+  },
+  {
+    "slug": "redis",
+    "display_name": "Redis",
+    "description": "In-memory data store for caching, queues, and real-time apps",
+    "tags": ["cache", "database", "in-memory"],
+    "icon": "Database",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/redis.png",
+    "color": "#DC382D",
+    "category": "Databases"
+  },
+  {
+    "slug": "ghost",
+    "display_name": "Ghost",
+    "description": "Professional publishing platform with built-in memberships and newsletters",
+    "tags": ["cms", "blog", "publishing"],
+    "icon": "Newspaper",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/ghost.png",
+    "color": "#15171a",
+    "category": "CMS"
+  },
+  {
+    "slug": "plausible",
+    "display_name": "Plausible Analytics",
+    "description": "Lightweight, privacy-friendly web analytics alternative to Google Analytics",
+    "tags": ["analytics", "privacy", "metrics"],
+    "icon": "BarChart3",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/plausible.png",
+    "color": "#5850ec",
+    "category": "Analytics"
+  },
+  {
+    "slug": "gitea",
+    "display_name": "Gitea",
+    "description": "Lightweight self-hosted Git service with CI/CD",
+    "tags": ["git", "devtools", "ci-cd"],
+    "icon": "GitBranch",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/gitea.png",
+    "color": "#609926",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "uptime-kuma",
+    "display_name": "Uptime Kuma",
+    "description": "Self-hosted monitoring tool with beautiful status pages",
+    "tags": ["monitoring", "uptime", "alerts"],
+    "icon": "Activity",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/uptime-kuma.png",
+    "color": "#5cdd8b",
+    "category": "Monitoring"
+  },
+  {
+    "slug": "minio",
+    "display_name": "MinIO",
+    "description": "High-performance S3-compatible object storage",
+    "tags": ["storage", "s3", "object-storage"],
+    "icon": "HardDrive",
+    "icon_url": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/minio.png",
+    "color": "#C72C48",
+    "category": "Storage"
+  }
+]

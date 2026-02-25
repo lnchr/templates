@@ -1,0 +1,28 @@
+version: "1.0"
+
+metadata:
+  name: uptime-kuma
+  display_name: Uptime Kuma
+  description: |
+    Self-hosted monitoring tool with beautiful
+    status pages and 90+ notification services.
+  tags: [monitoring, uptime, alerts]
+  icon: activity
+
+volumes:
+  kuma-data:
+    backup_enabled: true
+
+applications:
+  uptime-kuma:
+    app_type: web
+    source_type: docker_image
+    image_url: louislam/uptime-kuma:1
+    exposed_ports: [3001]
+    replicas: 1
+    healthcheck_path: /api/status-page/heartbeat
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/uptime-kuma.png
+    color: "#5cdd8b"
+    volumes:
+      - name: kuma-data
+        mount_path: /app/data

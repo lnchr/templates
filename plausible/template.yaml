@@ -1,0 +1,41 @@
+version: "1.0"
+
+metadata:
+  name: plausible
+  display_name: Plausible Analytics
+  description: |
+    Lightweight, privacy-friendly web analytics.
+    An open source alternative to Google Analytics.
+  tags: [analytics, privacy, metrics]
+  icon: bar-chart-3
+
+variables:
+  SECRET_KEY_BASE:
+    type: secret
+    generate: true
+    length: 64
+    description: Secret key for session encryption
+
+databases:
+  plausible-db:
+    type: postgres
+
+  plausible-events:
+    type: clickhouse
+
+applications:
+  plausible:
+    app_type: web
+    source_type: docker_image
+    image_url: ghcr.io/plausible/community-edition:v2
+    exposed_ports: [8000]
+    replicas: 1
+    healthcheck_path: /api/health
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/plausible.png
+    color: "#5850ec"
+    depends_on: [plausible-db, plausible-events]
+    env:
+      DATABASE_URL: postgres://${plausible-db.USER}:${plausible-db.PASSWORD}@${plausible-db.HOST}:${plausible-db.PORT}/${plausible-db.DATABASE}
+      CLICKHOUSE_DATABASE_URL: http://${plausible-events.HOST}:${plausible-events.PORT}/plausible_events_db
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      BASE_URL: http://localhost:8000

@@ -1,0 +1,33 @@
+version: "1.0"
+
+metadata:
+  name: ghost
+  display_name: Ghost
+  description: |
+    Professional publishing platform with built-in
+    memberships, newsletters, and content monetization.
+  tags: [cms, blog, publishing]
+  icon: newspaper
+
+databases:
+  ghost-db:
+    type: mysql
+
+applications:
+  ghost:
+    app_type: web
+    source_type: docker_image
+    image_url: ghost:5-alpine
+    exposed_ports: [2368]
+    replicas: 1
+    healthcheck_path: /ghost/api/v4/admin/site/
+    icon_url: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/ghost.png
+    color: "#15171a"
+    depends_on: [ghost-db]
+    env:
+      database__client: mysql
+      database__connection__host: ${ghost-db.HOST}
+      database__connection__port: ${ghost-db.PORT}
+      database__connection__user: ${ghost-db.USER}
+      database__connection__password: ${ghost-db.PASSWORD}
+      database__connection__database: ${ghost-db.DATABASE}
